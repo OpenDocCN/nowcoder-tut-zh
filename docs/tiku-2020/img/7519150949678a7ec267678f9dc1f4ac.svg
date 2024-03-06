@@ -1,0 +1,15 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="25.582ex" height="4.509ex" style="vertical-align: -1.838ex; margin-left: -0.012ex; font-size: 15px;" viewBox="-5 -1150.1 11014.2 1941.5" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+<defs></defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+<rect fill="rgb(255, 255, 136)" stroke="none" width="11004" height="1736" x="0" y="-675"></rect>
+<g fill="rgb(204, 0, 0)" stroke="rgb(204, 0, 0)" transform="translate(287,0)">
+<g transform="scale(0.9)">
+<text direction="ltr" stroke="none" font-family="monospace" transform="scale(71.759) matrix(1 0 0 -1 0 0)">Missing close brace</text>
+</g>
+</g>
+<line stroke-linecap="square" stroke="#c00" stroke-width="71.76" y1="35" x2="35" x1="35" y2="1700" transform="translate(-5,-675)"></line>
+<line stroke-linecap="square" stroke="#c00" stroke-width="71.76" y1="35" x2="35" x1="35" y2="1700" transform="translate(10937,-675)"></line>
+<line stroke-linecap="square" stroke="#c00" stroke-width="71.76" y2="35" y1="35" x1="35" x2="10968" transform="translate(0,995)"></line>
+<line stroke-linecap="square" stroke="#c00" stroke-width="71.76" y2="35" y1="35" x1="35" x2="10968" transform="translate(0,-680)"></line>
+</g>
+</svg>

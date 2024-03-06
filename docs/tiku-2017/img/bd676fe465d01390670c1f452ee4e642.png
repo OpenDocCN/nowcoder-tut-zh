@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/qq_35314344/article/details/76083170"/> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta name="description" content="【题目】
+小B负责首都的防卫工作。
+首都处于一个四面环山的盆地中，周围的n个小山构成一个环，作为预警措施，小B计划在每个小山上设置一个观察哨，日夜不停的瞭望周围发生的情况。
+一旦发生外敌入侵事件，山顶上的岗哨将点燃烽烟。
+若两个岗哨所在的山峰之间的那些山峰，高度都不大于这两座山峰，且这两个山峰之间有相连通路，则岗哨可以观察到另一个山峰上的烽烟是否点燃。
+由于小山处于环上，任意两个小山之间" />
+    <meta name="keywords" content="面试,算法" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>左神面试算法整理---单调栈 - CSDN博客</title>
+    
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-95e059436a.min.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-02ffddfbf5.min.css">
+
+    <script type="text/javascript">
+        var username = "qq_35314344";
+        var blog_address = "https://blog.csdn.net/qq_35314344";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = ""; 
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "https://passport.csdn.net/account/login?from=https://blog.csdn.net/qq_35314344/article/details/76083170"
+        var blogUrl = "https://blog.csdn.net/";
+        var curSkin = "skin3-template";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+        <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.2/css/sandalstrap.min.css"> 
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<body>    
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+    <script src="https://csdnimg.cn/public/sandalstrap/1.2/fonts/csdnc/csdnc.js"></script><link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+    var recommendCount = 10;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = '左神面试算法整理---单调栈';
+    var ChannelId = 7;
+    var articleId = '76083170';
+    var commentscount = 0;
+    var islock = true;
+    var curentUrl = "https://blog.csdn.net/qq_35314344/article/details/76083170";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 1;
+    //百度搜索
+    var baiduKey = "%E5%B7%A6%E7%A5%9E+%E7%AE%97%E6%B3%95+%E5%8D%9A%E5%AE%A2";
+    var needInsertBaidu = false;
+</script>
+
+<header>
+	<div class="container d-flex clearfix">
+		<div class="title-box">
+			<h6 class="title-blog">
+				<a href="https://blog.csdn.net/qq_35314344">qq_35314344的博客</a>
+			</h6>
+			<p class="description"></p>
+		</div>
+		<div class="opt-box d-flex justify-content-end">
+			<a class="btn btn-sm" href="https://blog.csdn.net/qq_35314344/rss/list">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#csdnc-rss"></use>
+					</svg>RSS订阅</a>
+					</div>
+	</div>
+</header><script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix pt0" id="mainBox">
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <h3 class="aside-title">个人资料</h3>
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/qq_35314344">
+                <img src="https://avatar.csdn.net/6/7/E/3_qq_35314344.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/qq_35314344" target="_blank" class="text-truncate" id="uid">qq_35314344</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                                <a class="btn btn-sm btn-red-hollow" href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/qq_35314344/article/details/76083170" target="_self">关注</a>
+                            </span>
+            
+        </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+        <dl class="text-center" title="18">
+            <dt>原创</dt>
+            <dd><span class="count">18</span></dd>
+        </dl>
+        <dl class="text-center" title="2">
+            <dt>粉丝</dt>
+            <dd id='fan'><span class="count">2</span></dd>
+        </dl>
+        <dl class="text-center" title="1">
+            <dt>喜欢</dt>
+            <dd><span class="count">1</span></dd>
+        </dl>
+        <dl class="text-center" title="0">
+            <dt>评论</dt>
+            <dd><span class="count">0</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="2级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-2"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="4330">
+                4330            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="232">
+                232            </dd>
+        </dl>
+        <dl title="328150">
+            <dt>排名：</dt>
+            <dd>32万+</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                        <a class="icon-badge" title="持之以恒">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-m-lasting"></use>
+            </svg>
+            <div class="icon-arrow"></div>
+            <div class="grade-detail-box item2">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-lasting"></use>
+                        </svg>
+                        <p>持之以恒</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予每个自然月内发布4篇或4篇以上原创或翻译IT博文的用户。不积跬步无以至千里，不积小流无以成江海，程序人生的精彩需要坚持不懈地积累！
+                    </div>
+                </div>
+            </div>
+        </a>
+                            </div>
+    </div>		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/lgyyovfyh.js"></script>
+    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_35314344/article/details/78207556" target="_blank">HTTP协议详解</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_35314344/article/details/77650295" target="_blank">函数是如何调用的</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_35314344/article/details/77649027" target="_blank">C++虚函数的实现机制</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_35314344/article/details/77620891" target="_blank">树状数组求解逆序问题</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_35314344/article/details/77584979" target="_blank">常见比较排序算法的实现</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    		    <div id="asideCategory" class="aside-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a href="https://blog.csdn.net/qq_35314344/article/category/7058307">
+                    左神面试算法整理                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideArchive" class="aside-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_35314344/article/month/2017/10">
+                    2017年10月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_35314344/article/month/2017/08">
+                    2017年8月                    <span class="count float-right">20篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_35314344/article/month/2017/07">
+                    2017年7月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/qq_35314344/article/details/76083170">左神面试算法整理---单调栈</a>
+					<p class="read">阅读量：<span>1431</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qq_35314344/article/details/76177009">左神面试算法整理--并归求小和</a>
+					<p class="read">阅读量：<span>412</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qq_35314344/article/details/76087540">左神面试算法--哈希表</a>
+					<p class="read">阅读量：<span>201</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qq_35314344/article/details/77504765">将数组分成m个子数组，使子数组和的最大值最小</a>
+					<p class="read">阅读量：<span>155</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qq_35314344/article/details/77498940">折纸问题</a>
+					<p class="read">阅读量：<span>154</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    		<div id="asideFooter">
+			
+		<div class="aside-box">
+						<script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+					</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?20180309" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+    <main>
+        <div class="blog-content-box">
+	<div class="article-title-box">
+			<span class="article-type type-1 float-left">原</span>		<h6 class="title-article">左神面试算法整理---单调栈</h6>
+	</div>
+	<div class="article-info-box">
+		<div class="article-bar-top d-flex">
+												<span class="time">2017年07月25日 17:15:34</span>
+			<div class="float-right">
+				<span class="read-count">阅读数：1440</span>
+											</div>
+		</div>
+	</div>
+	<article>
+		<div id="article_content" class="article_content csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css" />
+            <div class="htmledit_views">
+                
+【题目】<br />
+小B负责首都的防卫工作。<br />
+首都处于一个四面环山的盆地中，周围的n个小山构成一个环，作为预警措施，小B计划在每个小山上设置一个观察哨，日夜不停的瞭望周围发生的情况。<br />
+一旦发生外敌入侵事件，山顶上的岗哨将点燃烽烟。<br />
+若两个岗哨所在的山峰之间的那些山峰，高度都不大于这两座山峰，且这两个山峰之间有相连通路，则岗哨可以观察到另一个山峰上的烽烟是否点燃。<br />
+由于小山处于环上，任意两个小山之间存在两个不同的连接通路。满足上述不遮挡的条件下，一座山峰上岗哨点燃的烽烟至少可以通过一条通路被另一端观察到。<br />
+对于任意相邻的岗哨，一端的岗哨一定可以发现一端点燃的烽烟。<br />
+小B设计的这种保卫方案的一个重要特性是能够观测到对方烽烟的岗哨对的数量，她希望你能够帮她解决这个问题。<br />
+输入<br />
+输入中有多组测试数据。每组测试数据的第一行为一个整数n（3&lt;=n&lt;=10^6），为首都周围的小山数量，第二行为n个整数，依次表示小山的高度h，（1&lt;=h&lt;=10^9）。<br />
+输出<br />
+对每组测试数据，在单独的一行中输出能相互观察到的岗哨的对数。<br />
+样例输入<br />
+5<br />
+1 2 4 5 3<br />
+样例输出<br /><p>7</p>
+<p>算法思想：</p>
+<p>此题可以理解为在两个山峰之间的山峰都比两端低时，两端山峰就是一对，现在就是求有多少对？此题可以转为环形链表中，一个数求他左右两边离他最近且大于他的数。</p>
+<p><img src="https://img-blog.csdn.net/20170728143719162?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzUzMTQzNDQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /><br /></p>
+<p><img src="" alt="" />（1,2）（1,3）（2,3）（2,4）（4,5）（3,4）（3,5）<img src="" alt="" />可以看出最高和次高可以组成一对，其他数据都能有两个相邻最大值，所以此问题通解（n-2）*2+1。<br /></p>
+<p>找出一个数左右最近的大于他的数，可以用单调栈实现。我们设定单调栈中，从栈顶到栈底依次变大。</p>
+<p>假设有数 5  2  1  4  3  7</p>
+<p><img src="" alt="" /><img src="https://img-blog.csdn.net/20170728144212223?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzUzMTQzNDQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /><br /></p>
+<p>先放5,2小于5，放2,1小于2，放1,4大于1，则1弹出，1的弹出是由于4，所以4是1右边临近的大于他的数，2在1下面，所以2是1左面临近大于他的数。相同原理2弹出，4进，3进，7进时同理弹出3,4,5</p>
+<p>      左      右</p>
+<p>1    2        4</p>
+<p>2    5        4</p>
+<p>3    4        7</p>
+<p>4    5        7</p>
+<p>5    null    7</p>
+<p>7    null   null</p>
+<p>总对数=4*2+1。此算法复杂度可以达到O（n），遍历算法O(n^2)</p>
+<p><br /></p>
+<p>以上算法只适用于，山峰高度都各不相等的情况下，若有相等则：一次遍历将相邻相等山峰合并，二次遍历找最大值开始压栈</p>
+<p><img src="" alt="" /><img src="https://img-blog.csdn.net/20170728144732074?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzUzMTQzNDQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /><br /></p>
+<p>将3个5压入，7个3压入，当6个4压入时，7个3要出栈。7个3中，自己有<img src="" alt="" />对，与3相邻的4，可以看到每个3，所以有7对，5与4同理有7对，</p>
+<p>共7*6/2+7+7。</p>
+<p>当压入数据与栈顶数据相同，则只需合并个数即可。</p>
+<p>没有数据入栈时，只需依次出栈，<img src="" alt="" /></p>
+<p><img src="https://img-blog.csdn.net/20170728151748132?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzUzMTQzNDQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /><br /></p>
+<p>纠正上图一个错误，对于7产生的个数，少加了一个12.因为只剩下7和10的时候，从10看向7和从7看向10是不一样的所以要加两次12</p>
+<p>6是最后一个进栈的数，他要和栈底的数产生对数。</p>
+<p>JAVA版</p>
+<p>package problems_2017_07_26;<br /><br /><br />
+import java.util.Scanner;<br />
+import java.util.Stack;<br /><br /><br />
+public class Problem_04_MountainsAndFlames {<br /><br /><br /><span style="white-space:pre;"></span>public static void main(String[] args) {<br /><span style="white-space:pre;"></span>Scanner in = new Scanner(System.in);<br /><span style="white-space:pre;"></span>while (in.hasNextInt()) {<br /><span style="white-space:pre;"></span>int size = in.nextInt();<br /><span style="white-space:pre;"></span>int[] arr = new int[size];<br /><span style="white-space:pre;"></span>for (int i = 0; i &lt; size; i++) {<br /><span style="white-space:pre;"></span>arr[i] = in.nextInt();<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>System.out.println(communications(arr));<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>}<br /><br /><br /><span style="white-space:pre;"></span>public static int nextIndex(int size, int i) {<br /><span style="white-space:pre;"></span>return i &lt; (size - 1) ? (i + 1) : 0;<br /><span style="white-space:pre;"></span>//相邻相同山峰之间的对数，若只有一个，则没有成对，若有两个以上计算内部成对数<br /><span style="white-space:pre;"></span>public static long getInternalSum(int n) {<br /><span style="white-space:pre;"></span>return n == 1L ? 0L : (long) n * (long) (n - 1) / 2L;<br /><span style="white-space:pre;"></span>}<br /><br /><br /><span style="white-space:pre;"></span>public static class Pair {<br /><span style="white-space:pre;"></span>public int value;<br /><span style="white-space:pre;"></span>public int times;<br /><br /><br /><span style="white-space:pre;"></span>public Pair(int value) {<br /><span style="white-space:pre;"></span>this.value = value;<br /><span style="white-space:pre;"></span>this.times = 1;<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>}<br /><br /><br /><span style="white-space:pre;"></span>public static long communications(int[] arr) {<br /><span style="white-space:pre;"></span>if (arr == null || arr.length &lt; 2) {<br /><span style="white-space:pre;"></span>return 0;<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>int size = arr.length;<br /><span style="white-space:pre;"></span>int maxIndex = 0;<br /><span style="white-space:pre;"></span>for (int i = 0; i &lt; size; i++) {<br /><span style="white-space:pre;"></span>maxIndex = arr[maxIndex] &lt; arr[i] ? i : maxIndex;//找到最高山峰的位置<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>int value = arr[maxIndex];//最高山峰的高度<br /><span style="white-space:pre;"></span>int index = nextIndex(size, maxIndex);//最高山峰的下一个位置<br /><span style="white-space:pre;"></span>long res = 0L;<br /><span style="white-space:pre;"></span>Stack&lt;Pair&gt; stack = new Stack&lt;&gt;();<br /><span style="white-space:pre;"></span>stack.push(new Pair(value));<br /><span style="white-space:pre;"></span>while (index != maxIndex) {<br /><span style="white-space:pre;"></span>value = arr[index];<br /><span style="white-space:pre;"></span>while (!stack.isEmpty() &amp;&amp; stack.peek().value &lt; value) {<br /><span style="white-space:pre;"></span>int times = stack.pop().times;<br /><span style="white-space:pre;"></span>//<span style="white-space:pre;"> </span>res += getInternalSum(times) + times;<br />
+//<span style="white-space:pre;"> </span>res += stack.isEmpty() ? 0 : times;<br /><span style="white-space:pre;"></span>res += getInternalSum(times) + times*2;//因为栈底是最大元素，所以在此阶段不可能跳出<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>if (!stack.isEmpty() &amp;&amp; stack.peek().value == value) {<br /><span style="white-space:pre;"></span>stack.peek().times++;<br /><span style="white-space:pre;"></span>} else {<br /><span style="white-space:pre;"></span>stack.push(new Pair(value));<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>index = nextIndex(size, index);<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>while (!stack.isEmpty()) {<br /><span style="white-space:pre;"></span>int times = stack.pop().times;<br /><span style="white-space:pre;"></span>res += getInternalSum(times);<br /><span style="white-space:pre;"></span>if (!stack.isEmpty()) {<br /><span style="white-space:pre;"></span>res += times;<br /><span style="white-space:pre;"></span>if (stack.size() &gt; 1) {//当栈底还剩大于1个的时候，弹出的那个数还可以与栈底的数称为对数<br /><span style="white-space:pre;"></span>res += times;<br /><span style="white-space:pre;"></span>} else {<br /><span style="white-space:pre;"></span>res += stack.peek().times &gt; 1 ? times : 0;<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>return res;<br /><span style="white-space:pre;"></span>}<br />
+}<br /></p>
+<p><br /></p>
+<p>C++版</p>
+<p>#include&lt;iostream&gt;<br />
+#include&lt;stack&gt;<br />
+#include&lt;vector&gt;<br /><br /><br />
+using namespace std;<br /><br /><br />
+struct Pair<br />
+{<br /><span style="white-space:pre;"></span>long value;<br /><span style="white-space:pre;"></span>long sum;<br /><span style="white-space:pre;"></span>Pair(long value):value(value),sum(1){}<br /><br /><br />
+};<br />
+int findindex(int i,int size)<br />
+{<br /><span style="white-space:pre;"></span>return i&lt;size-1?i+1:0;<br />
+}<br />
+int internalsum(Pair a)<br />
+{<br /><span style="white-space:pre;"></span>int n=a.sum;<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>return n*(n-1)/2;<br />
+}<br /><br /><br />
+int fun(vector&lt;int&gt; vec)<br />
+{<br /><span style="white-space:pre;"></span>int n=vec.size();<br /><span style="white-space:pre;"></span>Pair temp(vec[0]);<br /><span style="white-space:pre;"></span>vector&lt;Pair&gt; a;<br /><span style="white-space:pre;"></span>int max=0;<br /><span style="white-space:pre;"></span>int maxi=0;<br /><span style="white-space:pre;"></span>for(int i=1;i&lt;n;i++)<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>if(vec[i]==vec[i-1])<br /><span style="white-space:pre;"></span>temp.sum++;<br /><span style="white-space:pre;"></span>else<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>a.push_back(temp);<br /><span style="white-space:pre;"></span>if(max&lt;temp.value)<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>max=temp.value;<br /><span style="white-space:pre;"></span>maxi=a.size()-1;<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span><br /><br /><br /><span style="white-space:pre;"></span>temp.value=vec[i];<br /><span style="white-space:pre;"></span>   temp.sum=1;<br /><br /><br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>}<br /><br /><br /><span style="white-space:pre;"></span>a.push_back(temp);<br /><span style="white-space:pre;"></span>if(max&lt;temp.value)<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>max=temp.value;<br /><span style="white-space:pre;"></span>maxi=a.size()-1;<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span><br /><br /><br /><br /><br /><span style="white-space:pre;"></span>stack&lt;Pair&gt; sta;<br /><span style="white-space:pre;"></span>Pair val=a[maxi];<br /><span style="white-space:pre;"></span>sta.push(val);<br /><span style="white-space:pre;"></span>int index=findindex(maxi,a.size());<br /><span style="white-space:pre;"></span>int count=0;<br /><span style="white-space:pre;"></span>while(index!=maxi)<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>while(!sta.empty()&amp;&amp;a[index].value&gt;sta.top().value)<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>count+=internalsum(sta.top())+2*sta.top().sum;<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>       sta.pop();<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>if(!sta.empty()&amp;&amp;a[index].value==sta.top().value)<br /><span style="white-space:pre;"></span>sta.top().sum+=a[index].sum;<br /><span style="white-space:pre;"></span>else<br /><span style="white-space:pre;"></span>sta.push(a[index]);<br /><br /><br /><span style="white-space:pre;"></span>index=findindex(index,a.size());<br /><br /><br /><span style="white-space:pre;"></span>}<br /><br /><br /><span style="white-space:pre;"></span>while(!sta.empty())<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>count+=internalsum(sta.top());<br /><span style="white-space:pre;"></span>int p=sta.top().sum;<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>       sta.pop();<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>if(!sta.empty())<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>count+=p;<br /><span style="white-space:pre;"></span><br /><span style="white-space:pre;"></span>if(sta.size()&gt;1)<br /><span style="white-space:pre;"></span>count+=p;<br /><span style="white-space:pre;"></span>else<br /><span style="white-space:pre;"></span>count+=sta.top().sum&gt;1?p:0;<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span><br /><br /><br /><br /><br /><span style="white-space:pre;"></span>}<br /><br /><br />
+return count;<br />
+}<br /><br /><br />
+int main()<br />
+{<br /><span style="white-space:pre;"></span>int n;<br /><span style="white-space:pre;"></span>while(cin&gt;&gt;n)<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>vector&lt;int&gt; vec;<br /><span style="white-space:pre;"></span>int in;<br /><span style="white-space:pre;"></span>for(int i=0;i&lt;n;i++)<br /><span style="white-space:pre;"></span>{<br /><span style="white-space:pre;"></span>cin&gt;&gt;in;<br /><span style="white-space:pre;"></span>vec.push_back(in);<br /><span style="white-space:pre;"></span>}<br /><span style="white-space:pre;"></span>int result=fun(vec);<br /><span style="white-space:pre;"></span>cout&lt;&lt;result&lt;&lt;endl;<br /><span style="white-space:pre;"></span>}<br /><br /><br /><span style="white-space:pre;"></span>system("pause");<br /><span style="white-space:pre;"></span>return 0;<br />
+}<br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+            </div>
+                </div>
+				<div class="hide-article-box text-center csdn-tracking-statistics tracking-click" data-mod="popu_376">
+			<a class="btn btn-red-hollow" id="btn-readmore">阅读更多</a>
+		</div>
+        	</article>
+	
+		<div class="article-bar-bottom">
+						<div class="tags-box artic-tag-box">
+			<span class="label">文章标签：</span>
+						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=面试&t=blog" target="_blank">面试						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=算法&t=blog" target="_blank">算法						</a>
+		</div>
+						<div class="tags-box">
+			<span class="label">个人分类：</span>
+						<a class="tag-link" href="https://blog.csdn.net/qq_35314344/article/category/7058307"  target="_blank">左神面试算法整理						</a>
+		</div>
+					</div>
+	
+	<!-- !empty($pre_next_article[0]) -->
+		</div>
+<script>
+    $(".MathJax").remove();
+</script>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config"> 
+    MathJax.Hub.Config({ 
+			"HTML-CSS": { 
+					linebreaks: { automatic: true, width: "94%container" },
+					imageFont: null
+			},
+			tex2jax: {
+				preview: "none"
+			},
+			mml2jax: {
+				preview: 'none'
+			}
+	});
+</script>
+<script>
+	(function(){
+		var btnReadmore = $("#btn-readmore");
+		if(btnReadmore.length>0){
+			var winH = $(window).height();
+			var articleBox = $("div.article_content");
+			var artH = articleBox.height();
+			if(artH > winH*2){
+				articleBox.css({
+					'height':winH*2+'px',
+					'overflow':'hidden'
+				})
+				btnReadmore.click(function(){
+					articleBox.removeAttr("style");
+					$(this).parent().remove();
+				})
+			}else{
+				btnReadmore.parent().remove();
+			}
+		}
+	})()
+</script>        <div class="edu-promotion"></div>
+        <a id="commentBox"></a>
+<div class="comment-box">
+			<div class="unlogin-box text-center">
+			博主设置当前文章不允许评论。
+		</div>
+		<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>        <div class="recommend-box">
+            		<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/xiaoquantouer/article/details/52573149" target="_blank" strategy="BlogCommendFromBaidu_0">
+				【京东校招笔试】保卫方案			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/xiaoquantouer/article/details/52573149" target="_blank" >
+				时间限制：c/c++语言1000MS；其他语言3000MS
+内存限制：c/c++语言65536KB；其他语言589824KB
+题目描述：
+战争游戏的至关重要环节就要到来了，这次的结果将决定王国的...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/xiaoquantouer" title="xiaoquantouer" target="_blank">
+					<img src="https://avatar.csdn.net/5/E/D/3_xiaoquantouer.jpg" alt="xiaoquantouer" class="avatar-pic">
+					<span class="name">xiaoquantouer</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-09-18 11:44:37</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2825</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/qq_35314344/article/details/76177009" target="_blank" strategy="BlogCommendFromBaidu_1">
+				左神面试算法整理--并归求小和			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/qq_35314344/article/details/76177009" target="_blank" >
+				算法思想：
+此题是求小和问题，求小和问题要用归并排序的思想来解决，只需在并归上稍作修改即可，所以我们要先看一下并归排序。
+并归排序的基础知识参见博文：http://blog.csdn.net/left...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/qq_35314344" title="qq_35314344" target="_blank">
+					<img src="https://avatar.csdn.net/6/7/E/3_qq_35314344.jpg" alt="qq_35314344" class="avatar-pic">
+					<span class="name">qq_35314344</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-07-27 11:04:48</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：422</span>
+			</p>
+		</div>
+	</div>
+				<div class="recommend-item-box recommend-ad-box" id="ad1">
+
+							<script>
+				  var width = $("div.recommend-box").outerWidth() - 48;
+					NEWS_FEED({
+						w: width,
+						h : 90,
+						showid : 'GNKXx7',
+						placeholderId: "ad1",
+						inject : 'define',
+						define : {
+							imagePosition : 'right',
+							imageBorderRadius : 0,
+							imageWidth: 120,
+							imageHeight: 90,
+							imageFill : 'clip',
+							displayImage : true,
+							displayTitle : true,
+							titleFontSize: 20,
+							titleFontColor: '#333',
+							titleFontFamily : 'Microsoft Yahei',
+							titleFontWeight: 'bold',
+							titlePaddingTop : 0,
+							titlePaddingRight : 0,
+							titlePaddingBottom : 10,
+							titlePaddingLeft : 0,
+							displayDesc : true,
+							descFontSize: 14,
+							descFontColor: '#6b6b6b',
+							descFontFamily : 'Microsoft Yahei',
+							paddingTop : 0,
+							paddingRight : 0,
+							paddingBottom : 0,
+							paddingLeft : 0,
+							backgroundColor: '#fff',
+							hoverColor: '#ca0c16'
+						}
+					})
+				</script>
+
+			
+		</div>
+				<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/qq_31963719/article/details/78079988" target="_blank" strategy="BlogCommendFromBaidu_2">
+				牛课堂左神算法题总结			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/qq_31963719/article/details/78079988" target="_blank" >
+				给定一个无序整型数组arr，找到数组中未出现的最小正整数。 
+举例： 
+arr=[-1,2,3,4]  返回 1； 
+arr=[1,2,3,4,] 返回 5； 
+需求：时间复杂度为O(N),额外空间复...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/qq_31963719" title="qq_31963719" target="_blank">
+					<img src="https://avatar.csdn.net/6/D/1/3_qq_31963719.jpg" alt="qq_31963719" class="avatar-pic">
+					<span class="name">qq_31963719</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-09-24 21:29:23</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：1657</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/qq_35314344/article/details/76209900" target="_blank" strategy="BlogCommendFromBaidu_3">
+				左神面试算法整理--最大子串和			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/qq_35314344/article/details/76209900" target="_blank" >
+				算法思想：
+
+
+
+
+当一个数组中有一个子串它的累加和是最大的，那么它不存在一个前缀或是后缀是负数，如果存在的话，它就不是最大和，因为出去前缀或是后缀他的值会更大。因此此题的解题思路就是找有效...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/qq_35314344" title="qq_35314344" target="_blank">
+					<img src="https://avatar.csdn.net/6/7/E/3_qq_35314344.jpg" alt="qq_35314344" class="avatar-pic">
+					<span class="name">qq_35314344</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-07-27 17:14:34</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：145</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/jk0427/article/details/79403456" target="_blank" strategy="BlogCommendFromBaidu_4">
+				左神《直通BAT面试算法精讲课》			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/jk0427/article/details/79403456" target="_blank" >
+				左神精讲视频课，可以使用优惠码，也可以直接点进去链接购买，可以减十元。 
+大家一起学习，共同进步！ 
+专属优惠码为：AFyqyO0  
+专属优惠购课链接：http://www.nowcoder.com...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/jk0427" title="jk0427" target="_blank">
+					<img src="https://avatar.csdn.net/4/E/5/3_jk0427.jpg" alt="jk0427" class="avatar-pic">
+					<span class="name">jk0427</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2018-02-28 17:32:00</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：269</span>
+			</p>
+		</div>
+	</div>
+						<div class="recommend-item-box recommend-download-box csdn-tracking-statistics clearfix" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+			<div class="content float-left">
+				<h4 class="text-truncate">
+					<a href="https://download.csdn.net/download/ulando/9947688" target="_blank" strategy="BlogCommendFromBaidu_5">
+						<red style="color: red;">左</red><red style="color: red;">神</red>的著作源码：程序员代码<red style="color: red;">面试</red>指南 IT名企算法与数据结构题目最优解的源代码全（java）					</a>
+				</h4>
+				<p>
+					<span class="data">2017年08月24日 </span>
+					<span class="size">484KB</span>
+					<span class="type">下载</span>
+				</p>
+			</div>
+			<div class="img-box float-right">
+				<a href="https://download.csdn.net/download/ulando/9947688" target="_blank" strategy="BlogCommendFromBaidu_5">
+					<img src="http://csdnimg.cn/release/download/old_static/images/minetype/zip.svg" alt="">
+				</a>
+			</div>
+		</div>
+					<div class="recommend-item-box recommend-ad-box" id="a_d_feed_0">
+			<script>
+				var width = $("div.recommend-box").outerWidth() - 48;
+				NEWS_FEED({
+					w: width,
+					h: 90,
+					showid: 'Afihld',
+					placeholderId: 'a_d_feed_0',
+					inject: 'define',
+					define: {
+						imagePosition: 'right',
+						imageBorderRadius: 0,
+						imageWidth: 120,
+						imageHeight: 90,
+						imageFill: 'clip',
+						displayImage: true,
+						displayTitle: true,
+						titleFontSize: 20,
+						titleFontColor: '#333',
+						titleFontFamily: 'Microsoft Yahei',
+						titleFontWeight: 'bold',
+						titlePaddingTop: 0,
+						titlePaddingRight: 0,
+						titlePaddingBottom: 10,
+						titlePaddingLeft: 0,
+						displayDesc: true,
+						descFontSize: 14,
+						descFontColor: '#6b6b6b',
+						descFontFamily: 'Microsoft Yahei',
+						paddingTop: 0,
+						paddingRight: 0,
+						paddingBottom: 0,
+						paddingLeft: 0,
+						backgroundColor: '#fff',
+						hoverColor: '#ca0c16'
+					}
+				})
+			</script>
+		</div>
+			<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/qq1169091731/article/details/52006440" target="_blank" strategy="BlogCommendFromBaidu_6">
+				单调栈（poj -- 2559）			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/qq1169091731/article/details/52006440" target="_blank" >
+				给定从左到右多个矩形，已知这此矩形的宽度都为1，长度不完全相等。这些矩形相连排成一排，求在这些矩形包括的范围内能得到的面积最大的矩形，打印出该面积。所求矩形可以横跨多个矩形，但不能超出原有矩形所确定的...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/qq1169091731" title="qq1169091731" target="_blank">
+					<img src="https://avatar.csdn.net/4/3/E/3_qq1169091731.jpg" alt="qq1169091731" class="avatar-pic">
+					<span class="name">qq1169091731</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-07-23 20:54:20</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：656</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/sjyttkl/article/details/76033746" target="_blank" strategy="BlogCommendFromBaidu_7">
+				左神课堂开始			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/sjyttkl/article/details/76033746" target="_blank" >
+				这些都是左神（左程云）课堂里讲的例子，写下自己的理解。
+
+
+1、已知一个字符串都是由左括号(和右括号)组成，判断该字符串是否是有效的括号组合。
+
+
+
+例子：
+
+有效的括号组合:()()(())(()(...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/sjyttkl" title="sjyttkl" target="_blank">
+					<img src="https://avatar.csdn.net/6/E/4/3_sjyttkl.jpg" alt="sjyttkl" class="avatar-pic">
+					<span class="name">sjyttkl</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-07-24 18:34:22</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：502</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/m0_37693059/article/details/78012635" target="_blank" strategy="BlogCommendFromBaidu_8">
+				10. Regular Expression Matching 字符串匹配 左程云			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/m0_37693059/article/details/78012635" target="_blank" >
+				Implement regular expression matching with support for '.' and '*'.
+'.' Matches any single character...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/m0_37693059" title="m0_37693059" target="_blank">
+					<img src="https://avatar.csdn.net/5/B/2/3_m0_37693059.jpg" alt="m0_37693059" class="avatar-pic">
+					<span class="name">m0_37693059</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-09-17 19:39:23</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：196</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/m0_37693059/article/details/77778398" target="_blank" strategy="BlogCommendFromBaidu_9">
+				动态规划/leetcode/直接推导递推公式			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/m0_37693059/article/details/77778398" target="_blank" >
+				通过编写动态规划系列题目，拓宽思路 
+413 Arithmetic slices 等差数列切片 子数组（连续子序列）
+题意：寻找一个数组的连续子数组，使得这个子数组是等差数列。请求出这种子数组的个数。...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/m0_37693059" title="m0_37693059" target="_blank">
+					<img src="https://avatar.csdn.net/5/B/2/3_m0_37693059.jpg" alt="m0_37693059" class="avatar-pic">
+					<span class="name">m0_37693059</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-09-02 00:03:03</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：334</span>
+			</p>
+		</div>
+	</div>
+			            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+</div>
+<div class="mask-dark"></div>
+<div class="report-box">
+    <div class="pos-box">
+        <h2 class="title">不良信息举报</h2>
+        <a class="btn-close">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-times"></use>
+            </svg>
+        </a>
+        <form id="frmReport">
+            <div class="form-box">
+                <div class="txt-row-box">
+                    <label class="title" id="reptTit">举报内容：</label>
+                    <p class="rpt-title text-truncate">左神面试算法整理---单调栈</p>
+                </div>
+                <div class="txt-row-box">
+                    <label class="title">举报原因：</label>
+                    <div class="rdo-box">
+                        <label><input type="radio" class="rdo-chk report-type" id="report_sex" name="report_type" value="1">色情</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_Politics" name="report_type" value="2">政治</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_copy" name="report_type" value="3">抄袭</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_ad" name="report_type" value="4">广告</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_want" name="report_type" value="5">招聘</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_call" name="report_type" value="6">骂人</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_other" name="report_type" value="7">其他</label>
+                    </div>
+                </div>
+                <div class="txt-row-box" id="rptOriginalurl">
+                    <label class="title">原文地址：</label>
+                    <div class="txt-box">
+                        <input class="ipt" type="text" name="originalurl">
+                    </div>
+                </div>
+                <div class="txt-row-box">
+                    <label class="title">原因补充：</label>
+                    <div class="txt-box">
+                        <textarea class="ipt ipt-textarea" name="description" maxlength="30"></textarea>
+                        <p class="remark">最多只允许输入30个字</p>
+                    </div>
+                </div>
+            </div>
+            <div class="opt-box text-right">
+                <input type="reset" class="btn btn-link-gray btn-close" value="取消">
+                <input type="submit" class="btn btn-red btn-submit" value="提交">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">加入CSDN，享受更精准的内容推荐，与500万程序员共同成长！</span>
+		<div class="pulllog-btn float-right clearfix">
+            <button class="pulllog-login float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                登录
+            </button>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li>
+			<button class="btn-like " title="点赞">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<p>1</p>
+			</button>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc" title="目录">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg><br>目录
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark" title="收藏">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg><br>收藏
+			</button>
+		</li>
+		<li>
+			<a class="btn-comments" title="评论" href="#commentBox">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg><br>评论
+			</a>
+		</li>
+				<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_weixin" data-cmd="weixin" title="微信分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-wechat"></use>
+				</svg><br>微信
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_tsina" data-cmd="tsina" title="微博分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-weibo"></use>
+				</svg><br>微博
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_qzone" data-cmd="qzone" title="QQ分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-qq"></use>
+				</svg><br>QQ
+			</a>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.2/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,'左神面试算法整理---单调栈');
+        }
+    })
+</script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-bd54b21308.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-2b2f45e3ad.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-46c7bd3d86.min.js"></script>
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=%E5%B7%A6%E7%A5%9E+%E7%AE%97%E6%B3%95+%E5%8D%9A%E5%AE%A2"  type="text/javascript"></script>
+</body>
+<div class="box-box-default">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/mhzzjepzz.js"></script>
+</div>
+<div class="box-box-large">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/idvveasfs.js"></script>
+</div>
+</html>
