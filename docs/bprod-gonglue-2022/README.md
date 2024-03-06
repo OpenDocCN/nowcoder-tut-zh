@@ -1,3 +1,3 @@
-# 牛客快消行业求职攻略—百威篇 2021~2022
+# 牛客 B 端产品经理求职攻略 2021~2022
 
-来源：[`www.nowcoder.com/tutorial/10086/44833e3fa55c4d5cafb3b3da2e49b835`](https://www.nowcoder.com/tutorial/10086/44833e3fa55c4d5cafb3b3da2e49b835)
+来源：[`www.nowcoder.com/tutorial/10037/c7e043df0ee54fa7ad007a1c50389bd9`](https://www.nowcoder.com/tutorial/10037/c7e043df0ee54fa7ad007a1c50389bd9)

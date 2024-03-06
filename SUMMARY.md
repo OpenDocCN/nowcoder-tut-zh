@@ -1,7 +1,7 @@
 +   [牛客笔面试必备—算法学习笔记之数据处理精讲](docs/algo-bimianshi/README.md)
 +   [牛客快消行业求职攻略—百威篇 2021~2022](docs/baiwei-gonglue-2022/README.md)
 +   [牛客商业产品校招求职攻略](docs/bizprod-gonglue-2022/README.md)
-+   [牛客快消行业求职攻略—百威篇 2021~2022](docs/bprod-gonglue-2022/README.md)
++   [牛客 B 端产品经理求职攻略 2021~2022](docs/bprod-gonglue-2022/README.md)
 +   [牛客网 C 语言入门自学指南](docs/c-tut/README.md)
 +   [牛客客户端岗求职经验分享 2021~2022](docs/client-jingyan-2022/README.md)
 +   [牛客 C++ 工程师岗位求职经验分享 2021~2022](docs/cpp-jingyan-2022/README.md)
